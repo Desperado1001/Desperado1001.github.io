@@ -440,15 +440,17 @@
 <p>777的权限就是：rwxrwxrwx 。第一位7等于4+2+1，所以就是rwx，所有者有读取、写入、执行的权限；第二位7也是4+2+1，rwx，同组用户具有读取、写入、执行权限；第三位7，代表公共用户有读取、写入、执行的权限。</p>
 <p>755的权限就是：rwxr-xr-x。第一位7等于4+2+1，所以就是rwx，所有者有读取、写入、执行的权限；第二位5也是4+0+1，r-x，同组用户具有读取、执行权限；第三位5，代表公共用户有读取、执行的权限。 </p>
 <p>644的权限就是：rw-r–r–。第一位6等于4+2+0，所以就是rw-，所有者有读取、写入的权限；第二位4也是4+0+0，r–，同组用户具有读取的权限；第三位4，代表公共用户有读取的权限。 </p>
+<p>​    <code>sudo mkdir git
+   sudo chown -R $USER:$USER /home/git
+   sudo chmod -R 755 /home/git
+   cd /home/git
+   git init --bare hexoBlog.git</code></p>
+</li>
+<li><p>效果如下</p>
+<p><img src="https://i.loli.net/2020/03/08/DMv4S8m19Jfxzit.png" alt="image.png"></p>
 </li>
 </ul>
 </li>
-</ol>
-<pre><code>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo mkdir git</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo chown -R $USER:$USER &#x2F;home&#x2F;git</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sudo chmod -R 755 &#x2F;home&#x2F;git</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">cd &#x2F;home&#x2F;git</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">git init --bare hexoBlog.git</span></pre></td></tr></table></figure>
-
-- 效果如下
-
-  ![image.png](https://i.loli.net/2020/03/08/DMv4S8m19Jfxzit.png)</code></pre><ol start="3">
 <li><p>创建git钩子</p>
 <ul>
 <li><p>将本地通过git上传的文件放到指令的hexo博客目录</p>
@@ -554,7 +556,7 @@ scp -r local_dir username@servername:remote_dir
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-08T15:44:06+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-08T15:48:02+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2020年3月8日</p>
