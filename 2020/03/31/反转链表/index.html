@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: 博客入门 | Forpaolo</title>
+  <title>反转链表 | Forpaolo</title>
   
   
   <meta name="description" content="又见暮雪亦白头">
@@ -48,7 +48,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Forpaolo</h1>
@@ -289,25 +289,11 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
+      <div class='l_main'>
   
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
 
 
   <section class='meta'>
@@ -316,11 +302,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2019/12/15/hexo%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A/">
-      hexo参数配置注释
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2020/03/31/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+        反转链表
+      </a>
+    </h1>
+  
 
 
       
@@ -348,7 +336,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-15</p>
+    <p>2020-03-31</p>
   </a>
 </div>
 
@@ -358,11 +346,29 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Hexo/' rel="nofollow">
+    <a href='/categories/Leetcode/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Hexo</p>
+      <p>Leetcode</p>
     </a>
   </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
 
 
           
@@ -375,7 +381,7 @@
         <span class="post-meta-item-icon">
           <i class="fa fa-keyboard"></i>
           <span class="post-meta-item-text">  字数统计: </span>
-          <span class="post-count">269字</span>
+          <span class="post-count">353字</span>
         </span>
       </span>
       &nbsp; | &nbsp;
@@ -405,46 +411,237 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><ul>
+<li><p>反转一个单链表。</p>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><ul>
+<li><p>循环调用函数自身，缩小计算范围</p>
+</li>
+<li><p>必须要有递归结束条件，否则会无限递归</p>
+</li>
+<li><p>递归是从内到外进行数据计算</p>
+<ul>
+<li><p>阶乘</p>
+</li>
+<li><pre><code class="c"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> n)</span></span>{
+  <span class="keyword">if</span> (n == <span class="number">1</span>)
+    <span class="keyword">return</span> <span class="number">1</span>;
+  <span class="keyword">else</span> 
+    <span class="keyword">return</span> n * foo(n<span class="number">-1</span>)
+} 
+&lt;!--￼<span class="number">1</span>--&gt;</code></pre>
+</li>
+</ul>
+</li>
+<li><p>结果如下，输出为[1, 2, 3]</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">i am here</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">i am here</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">return  3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">before</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">ListNode&#123;val: 2, next: ListNode&#123;val: 3, next: None&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">after</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">before</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">ListNode&#123;val: 1, next: ListNode&#123;val: 2, next: None&#125;&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">after</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">[3, 2, 1]</span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>理解</p>
+<ol>
+<li><p>函数进来之后先遍历链表，当head为2时 head.next 为空返回</p>
+</li>
+<li><p>此时cur 为链表的头节点（第一个节点）</p>
+</li>
+<li><p>将3-&gt;2-&gt;None 进行翻转</p>
+</li>
+<li><p>之前每次的递归调用都需要返回，有始有终，进来了自然需要出去。</p>
+</li>
+<li><pre><code class="java">reverseList(head-&gt;<span class="number">1</span>)
+    reverseList(head-&gt;<span class="number">2</span>)
+        reverseList(head-&gt;<span class="number">3</span>)
+            reverseList(head-&gt;<span class="number">4</span>)
+                reverseList(head-&gt;<span class="number">5</span>)
+                    触发终止条件，返回head
+                cur = reverseList()返回结果
+                cur-&gt;<span class="number">5</span>
+                head-&gt;next-&gt;next = head
+                <span class="comment">// 5.next-&gt;4</span>
+                返回cur(<span class="number">5</span>)
+
+            cur = reverseList()返回结果
+            cur-&gt;<span class="number">5</span>
+            head-&gt;next-&gt;next = head
+            <span class="comment">// 4.next-&gt;3</span>
+            返回cur(<span class="number">5</span>)
+
+        cur = reverseList()返回结果
+        cur-&gt;<span class="number">5</span>
+        head-&gt;next-&gt;next = head
+        <span class="comment">// 3.next-&gt;2</span>
+        返回cur(<span class="number">5</span>)
+
+    cur = reverseList()返回结果
+    cur-&gt;<span class="number">5</span>
+    head-&gt;next-&gt;next = head
+    <span class="comment">// 2.next-&gt;1</span>
+    返回cur(<span class="number">5</span>)
+&lt;!--￼<span class="number">3</span>--&gt;
+
+
+</code></pre>
+</li>
+</ol>
+</li>
+</ul>
+
+      </div>
+      
+        <br>
+        <p>感谢🙏你的阅读，May you have a good day！</p>
+
       
       
-        <div class="readmore">
-          <a href="/2019/12/15/hexo%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E6%B3%A8%E9%87%8A/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-05T10:55:35+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年4月5日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/31/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=反转链表 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/03/31/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=反转链表 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/31/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/&title=反转链表 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/hexo-config/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> hexo_config</a>
-        
-          <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%85%A5%E9%97%A8/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 博客入门</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
-        
+
       
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/03/08/Hexo%E5%8D%9A%E5%AE%A2%E6%8E%A8%E9%80%81%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/" rel="prev" title="Hexo博客推送到腾讯云相关配置">
+                                  
+                                      Hexo博客推送到腾讯云相关配置
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/nginx/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> nginx</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
 
-  
 
 
-    
-  
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '反转链表',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class='l_side'>
   
@@ -544,6 +741,77 @@
         
           
           
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+
+
+  <section class='widget music'>
+    
+<header class='pure'>
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn"
+    
+      rel="external nofollow noopener noreferrer"
+    
+    
+      target="_blank"
+    
+    href="https://music.163.com/#/user/home?id=88847092"
+    title="https://music.163.com/#/user/home?id=88847092">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme="#1BCDFC"
+    
+    
+    data-mode="random"
+    data-server="netease"
+    data-type="playlist"
+    data-id="102281366"
+    data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
             
               <section class='widget plain'>
   
@@ -588,102 +856,39 @@
         
           
           
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
             
-              <section class='widget list'>
-  
+              
+  <section class='widget toc-wrapper'>
+    
 <header class='pure'>
-  <div><i class="fas fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;随便看看</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer noopener" href="javascript:void(0)" target="_blank"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
   
 </header>
 
-  <div class='content pure'>
-    <ul class="entry">
-      
-        <li><a class="flat-box" title="https://xaoxuu.com/wiki/hexo.sh/" href="https://xaoxuu.com/wiki/hexo.sh/"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;Hexo脚本（Mac）
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://xaoxuu.com/wiki/vim-cn.sh/" href="https://xaoxuu.com/wiki/vim-cn.sh/"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;图床脚本（Mac）
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://yasuotu.com" href="https://yasuotu.com"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;图片在线压缩
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://realfavicongenerator.net" href="https://realfavicongenerator.net"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;生成Favicon
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://mxclub.github.io/resume/" href="https://mxclub.github.io/resume/"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;简历主题
-          </div>
-          
-        </a></li>
-      
-    </ul>
-  </div>
-</section>
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#知识点"><span class="toc-text">知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-text">递归</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
 
             
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
       
@@ -924,6 +1129,140 @@
           
         
       
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget list'>
+  
+<header class='pure'>
+  <div><i class="fas fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;随便看看</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="entry">
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/hexo.sh/" href="https://xaoxuu.com/wiki/hexo.sh/"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;Hexo脚本（Mac）
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/vim-cn.sh/" href="https://xaoxuu.com/wiki/vim-cn.sh/"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;图床脚本（Mac）
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://yasuotu.com" href="https://yasuotu.com"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;图片在线压缩
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://realfavicongenerator.net" href="https://realfavicongenerator.net"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;生成Favicon
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://mxclub.github.io/resume/" href="https://mxclub.github.io/resume/"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;简历主题
+          </div>
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
     
 
   
@@ -1093,6 +1432,36 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+    
+      <script src="/js/volantis.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "KDtcKPxq34Dp8QTDdrSfk5yn-gzGzoHsz",
+    appKey: "K20BSMBn1eBkHPB3d9tw1aIy",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'true'
+  })
+  </script>
 
 
 
