@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2020/4 | Forpaolo</title>
+  <title>天天生鲜D1-工程项目搭建 | Forpaolo</title>
   
   
   <meta name="description" content="又见暮雪亦白头">
@@ -48,7 +48,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Forpaolo</h1>
@@ -290,24 +290,10 @@
   <div class="l_body">
     <div class='body-wrapper'>
       <div class='l_main'>
-	
-		
-  <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
   
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
 
 
   <section class='meta'>
@@ -316,11 +302,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2020/04/30/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD1/">
-      天天生鲜D1-工程项目搭建
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2020/04/30/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD1/">
+        天天生鲜D1-工程项目搭建
+      </a>
+    </h1>
+  
 
 
       
@@ -370,6 +358,24 @@
           
             
   
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+  
     <div style="margin-right: 10px;">
       <span class="post-time">
         <span class="post-meta-item-icon">
@@ -405,163 +411,276 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <div class="readmore">
-          <a href="/2020/04/30/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD1/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9C/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 天天生鲜</a>
-        
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h1 id="项目工程搭建"><a href="#项目工程搭建" class="headerlink" title="项目工程搭建"></a>项目工程搭建</h1><ol>
+<li><p>安装Django 2.2</p>
+</li>
+<li><p>安装 Django RESTFramwork </p>
+</li>
+<li><p>Msqlclient ，</p>
+</li>
+<li><p>cnpm 安装， node.js ,cnpm install</p>
+</li>
+<li><p>启动vue工程 cnpm run dev</p>
+</li>
+</ol>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><ol>
+<li><p>从pycharm中启动 app， 选择Run manage.py Task 启动Django 命令行, 可在该命令行中使用startapp +module 名称快速创建数据库模版</p>
+</li>
+<li><img src="/Users/macos/Desktop/截屏2020-05-01 上午10.53.56.png" alt="截屏2020-05-01 上午10.53.56" style="zoom:30%;" /> 
+</li>
+<li><h1 id="differentiate-null-True-blank-True-in-django"><a href="#differentiate-null-True-blank-True-in-django" class="headerlink" title="differentiate null=True, blank=True in django"></a><a href="https://stackoverflow.com/questions/8609192/differentiate-null-true-blank-true-in-django" target="_blank" rel="noopener">differentiate null=True, blank=True in django</a></h1><p><code>null=True</code> sets <code>NULL</code> (versus <code>NOT NULL</code>) on the column in your DB. Blank values for Django field types such as <code>DateTimeField</code> or <code>ForeignKey</code> will be stored as <code>NULL</code> in the DB.</p>
+<p><code>blank</code> determines whether the field will be required in forms. This includes the admin and your custom forms. If <code>blank=True</code> then the field will not be required, whereas if it’s <code>False</code> the field cannot be blank.</p>
+<p><code>blank</code> has no effect on the database, and <code>null</code> controls whether the database column allows <code>NULL</code> values. </p>
+<ul>
+<li><code>null</code> 是针对数据库而言，如果 <code>null=True</code>, 表示数据库的该字段可以为空。</li>
+<li><code>blank</code> 是针对表单的，如果 <code>blank=True</code>，表示你的表单填写该字段的时候可以不填，</li>
+</ul>
+</li>
+<li><p>class Meta 模型类中的内部类</p>
+<ul>
+<li><p>To override the database table name, use the <code>db_table</code> parameter in <code>class Meta</code>.<a href="https://docs.djangoproject.com/en/3.0/ref/models/options/" target="_blank" rel="noopener">https://docs.djangoproject.com/en/3.0/ref/models/options/</a></p>
+</li>
+<li><p>重写数据库表名</p>
+</li>
+</ul>
+</li>
+<li><p>替换系统用户</p>
+<ul>
+<li><p>Django重写用户模型</p>
+<ul>
+<li><p>Django内建的User模型可能不适合某些项目的类型</p>
+</li>
+<li><p>在setting 中修改</p>
+</li>
+<li><pre><code>AUTH_USER_MODEL = &apos;user.UserProfile&apos;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">     - python manage.py makemigrations 生成迁移文件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">     - python manage.py migrate 重新进行数据库迁移</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">6. CharField中choice字段</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">7. 添加第三方的应用</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">   - Settings.py 中 INSTALLED_APP 字段中添加 。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">   - 编写的每个应用都需要添加到配置文件中。使用了一些第三方应用，就应用安装好之后，你也需要将应用名添加到这个元组中去。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">8. &#96;__str__&#96; 和&#96;__repr__&#96;区别</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">   - 在缺省定义下，两者是等同的。未重新定义这两个函数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">   - 仅定义&#96;__repr__&#96;时，两者是相等的 ，但是仅定义&#96;__str__&#96;时两者不相等</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">   - &#96;__str__&#96;用于为用户创建输出，而&#96;__repr__&#96; 主要用于调试和开发，&#96;__repr__&#96;的目标是准确无误的，</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">     &#96;__str__&#96;是可读的</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">     &#96;&#96;&#96;python</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">     class Test3:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">         def __repr__(self):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">             return &quot;Test3.__repr__&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">         def __str__(self):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">             return &quot;Test3.__str__&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">     </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">     </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">     print(str(Test3()))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">     print(repr(Test3()))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">     print(str(Test3()) &#x3D;&#x3D; repr(Test3()))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">     </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">     &gt;&gt;&gt; print(str(Test3()))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">     Test3.__str__</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">     &gt;&gt;&gt; print(repr(Test3()))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">     Test3.__repr__</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">     &gt;&gt;&gt; print(str(Test3()) &#x3D;&#x3D; repr(Test3()))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">     False</span></pre></td></tr></table></figure></code></pre></li>
+</ul>
+</li>
+<li><p>两者均定义时使用各自的方法</p>
+</li>
+<li><p><code>__repr__</code>包含有关对象的所有信息的表示， <code>__str__</code> 用于推断对象的“非正式”字符串形式</p>
+</li>
+<li><p>数据库外键版本问题</p>
+<ul>
+<li>在django2.0后，定义外键和一对一关系的时候需要加on_delete选项，此参数为了避免两个表里的数据不一致问题，不然会报错：<br>TypeError: <strong>init</strong>() missing 1 required positional argument: ‘on_delete’</li>
+<li>on_delete有CASCADE、PROTECT、SET_NULL、SET_DEFAULT、SET()五个可选择的值<br>CASCADE：此值设置，是级联删除。<br>PROTECT：此值设置，是会报完整性错误。<br>SET_NULL：此值设置，会把外键设置为null，前提是允许为null。<br>SET_DEFAULT：此值设置，会把设置为外键的默认值。<br>SET()：此值设置，会调用外面的值，可以是一个函数。</li>
+<li>user=models.OneToOneField(User,on_delete=models.CASCADE) </li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h1><h2 id="migration原理及表生成"><a href="#migration原理及表生成" class="headerlink" title="migration原理及表生成"></a>migration原理及表生成</h2><ol>
+<li>配置setting.py 文件添加对应的app</li>
+<li>进行进行数据迁移<ol>
+<li>makemigrations 生成迁移文件</li>
+<li>migrat <app> ，可指定迁移的app名称，也可不指定。不指定的时候默认迁移所有相关的app数据库. 生成数据表</li>
+</ol>
+</li>
+</ol>
+<h1 id="xadmin-安装"><a href="#xadmin-安装" class="headerlink" title="xadmin 安装"></a>xadmin 安装</h1><ul>
+<li><img src="/Users/macos/Library/Application Support/typora-user-images/image-20200503153137546.png" alt="image-20200503153137546" style="zoom:50%;" />
+</li>
+<li><h3 id="TypeError-init-takes-1-positional-argument-but-6-were-given"><a href="#TypeError-init-takes-1-positional-argument-but-6-were-given" class="headerlink" title="TypeError: init() takes 1 positional argument but 6 were given"></a>TypeError: <strong>init</strong>() takes 1 positional argument but 6 were given</h3><ul>
+<li><a href="https://stackoverflow.com/questions/50669185/python-from-django-contrib-auth-views-import-logout-importerror-cannot-import-n" target="_blank" rel="noopener">stackoverflow 解答</a></li>
+</ul>
+<p>​    ImportError: cannot import name ‘login’ from ‘django.contrib.auth.views’</p>
+<p>​    It was this one that caused me the error.</p>
+<p>​    from django.contrib.auth.views import login</p>
+<p>​    Had to change it to</p>
+<p>​    from django.contrib.auth import login</p>
+<p>​    Worked for logout too.</p>
+</li>
+<li><p>Django2.2中xadmin错误汇总</p>
+<p><a href="https://www.cnblogs.com/netalen/p/10987016.html、" target="_blank" rel="noopener">https://www.cnblogs.com/netalen/p/10987016.html、</a></p>
+</li>
+<li><h3 id="‘Media’-object-has-no-attribute-‘add-js’"><a href="#‘Media’-object-has-no-attribute-‘add-js’" class="headerlink" title="‘Media’ object has no attribute ‘add_js’"></a>‘Media’ object has no attribute ‘add_js’</h3><ul>
+<li>修改xadmin中util.py中 vendor函数如下</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vendor</span><span class="params">(*tags)</span>:</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  css = &#123;<span class="string">'screen'</span>: []&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    js = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> tag <span class="keyword">in</span> tags:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        file_type = tag.split(<span class="string">'.'</span>)[<span class="number">-1</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        files = xstatic(tag)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> file_type == <span class="string">'js'</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            js.extend(files)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">elif</span> file_type == <span class="string">'css'</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            css[<span class="string">'screen'</span>] += files</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> Media(css=css, js=js)</span></pre></td></tr></table></figure>
+</li>
+<li><p><strong>报异常 ‘DateTimeField‘ object has no attribute ‘rel‘</strong></p>
+<ul>
+<li><pre><code class="python"><span class="keyword">if</span> isinstance(field.rel, models.ManyToOneRel):
+
+    related_fields.append(field_name)
+
+修改为
+
+<span class="keyword">if</span> isinstance(field.remote_field, models.ManyToOneRel):
+
+    related_fields.append(field_name)
+</code></pre>
+</li>
+<li><p><a href="https://blog.csdn.net/jehon/article/details/84851611?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2" target="_blank" rel="noopener">常见后台管理错误</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
       </div>
-    
-  </section>
-</article>
-
-          </div>
-        
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/04/25/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">
-      21.合并两个有序链表
-    </a>
-  </h2>
-
+        <br>
+        <p>感谢🙏你的阅读，May you have a good day！</p>
 
       
-      <div class='new-meta-box'>
+      
+        <br>
         
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="/http:/yoursite.com" rel="nofollow">
-        
-          <img src="https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg">
-        
-        <p>Paolo</p>
-      </a>
-    
-  </div>
 
 
-          
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
         
-          
-            <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-04T10:10:07+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-04-25</p>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年5月4日</p>
   </a>
 </div>
 
-          
+        
+      
         
           
-            
   
-  <div class='new-meta-item category'>
-    <a href='/categories/Leetcode/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Leetcode</p>
-    </a>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9C/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>天天生鲜</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/30/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD1/&title=天天生鲜D1-工程项目搭建 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/04/30/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD1/&title=天天生鲜D1-工程项目搭建 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/30/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD1/&title=天天生鲜D1-工程项目搭建 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
   </div>
+</div>
 
 
-          
+
         
-          
-            
-  
-    <div style="margin-right: 10px;">
-      <span class="post-time">
-        <span class="post-meta-item-icon">
-          <i class="fa fa-keyboard"></i>
-          <span class="post-meta-item-text">  字数统计: </span>
-          <span class="post-count">394字</span>
-        </span>
-      </span>
-      &nbsp; | &nbsp;
-      <span class="post-time">
-        <span class="post-meta-item-icon">
-          <i class="fa fa-hourglass-half"></i>
-          <span class="post-meta-item-text">  阅读时长≈</span>
-          <span class="post-count">1分</span>
-        </span>
-      </span>
-    </div>
-  
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
       
     </div>
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
       
-        <div class="readmore">
-          <a href="/2020/04/25/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-  </section>
-</article>
-
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2020/05/04/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD2/" rel="prev" title="天天生鲜D2">
+                                
+                                    天天生鲜D2
+                                
+                              </a>
+                          </h4>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/04/25/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" rel="prev" title="21.合并两个有序链表">
+                                  
+                                      21.合并两个有序链表
+                                  
+                              </a>
+                          </h4>
+                          
+                      </span>
+                  </section>
+              
           </div>
-        
       
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
+    </section>
+  </article>
 
 
-	
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '天天生鲜D1-工程项目搭建',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class='l_side'>
   
@@ -661,6 +780,77 @@
         
           
           
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+
+
+  <section class='widget music'>
+    
+<header class='pure'>
+  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
+  
+    <a class="rightBtn"
+    
+      rel="external nofollow noopener noreferrer"
+    
+    
+      target="_blank"
+    
+    href="https://music.163.com/#/user/home?id=88847092"
+    title="https://music.163.com/#/user/home?id=88847092">
+    <i class="far fa-heart fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  <div class="aplayer"
+    data-theme="#1BCDFC"
+    
+    
+    data-mode="random"
+    data-server="netease"
+    data-type="playlist"
+    data-id="102281366"
+    data-volume="0.7">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
             
               <section class='widget plain'>
   
@@ -705,102 +895,39 @@
         
           
           
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
             
-              <section class='widget list'>
-  
+              
+  <section class='widget toc-wrapper'>
+    
 <header class='pure'>
-  <div><i class="fas fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;随便看看</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer noopener" href="javascript:void(0)" target="_blank"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
   
 </header>
 
-  <div class='content pure'>
-    <ul class="entry">
-      
-        <li><a class="flat-box" title="https://xaoxuu.com/wiki/hexo.sh/" href="https://xaoxuu.com/wiki/hexo.sh/"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;Hexo脚本（Mac）
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://xaoxuu.com/wiki/vim-cn.sh/" href="https://xaoxuu.com/wiki/vim-cn.sh/"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;图床脚本（Mac）
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://yasuotu.com" href="https://yasuotu.com"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;图片在线压缩
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://realfavicongenerator.net" href="https://realfavicongenerator.net"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;生成Favicon
-          </div>
-          
-        </a></li>
-      
-        <li><a class="flat-box" title="https://mxclub.github.io/resume/" href="https://mxclub.github.io/resume/"
-          
-          
-          >
-          <div class='name'>
-            
-              <i class=" fa-fw" aria-hidden="true"></i>
-            
-            &nbsp;&nbsp;简历主题
-          </div>
-          
-        </a></li>
-      
-    </ul>
-  </div>
-</section>
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目工程搭建"><span class="toc-text">项目工程搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#知识点"><span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#differentiate-null-True-blank-True-in-django"><span class="toc-text">differentiate null=True, blank=True in django</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库迁移"><span class="toc-text">数据库迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#migration原理及表生成"><span class="toc-text">migration原理及表生成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xadmin-安装"><span class="toc-text">xadmin 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TypeError-init-takes-1-positional-argument-but-6-were-given"><span class="toc-text">TypeError: init() takes 1 positional argument but 6 were given</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#‘Media’-object-has-no-attribute-‘add-js’"><span class="toc-text">‘Media’ object has no attribute ‘add_js’</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
 
             
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
       
@@ -1043,6 +1170,140 @@
           
         
       
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget list'>
+  
+<header class='pure'>
+  <div><i class="fas fa-thumbs-up fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;随便看看</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="entry">
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/hexo.sh/" href="https://xaoxuu.com/wiki/hexo.sh/"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;Hexo脚本（Mac）
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://xaoxuu.com/wiki/vim-cn.sh/" href="https://xaoxuu.com/wiki/vim-cn.sh/"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;图床脚本（Mac）
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://yasuotu.com" href="https://yasuotu.com"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;图片在线压缩
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://realfavicongenerator.net" href="https://realfavicongenerator.net"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;生成Favicon
+          </div>
+          
+        </a></li>
+      
+        <li><a class="flat-box" title="https://mxclub.github.io/resume/" href="https://mxclub.github.io/resume/"
+          
+          
+          >
+          <div class='name'>
+            
+              <i class=" fa-fw" aria-hidden="true"></i>
+            
+            &nbsp;&nbsp;简历主题
+          </div>
+          
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
     
 
   
@@ -1124,14 +1385,6 @@
 </footer>
 <script>setLoadingBarProgress(80);</script>
 
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
@@ -1220,6 +1473,36 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+    
+      <script src="/js/volantis.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "KDtcKPxq34Dp8QTDdrSfk5yn-gzGzoHsz",
+    appKey: "K20BSMBn1eBkHPB3d9tw1aIy",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'true'
+  })
+  </script>
 
 
 
