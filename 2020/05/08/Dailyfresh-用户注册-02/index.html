@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>我的朋友们 | Forpaolo</title>
+  <title>Dailyfresh-用户注册 | Forpaolo</title>
   
   
   <meta name="description" content="又见暮雪亦白头">
@@ -48,7 +48,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover links half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Forpaolo</h1>
@@ -290,7 +290,9 @@
   <div class="l_body">
     <div class='body-wrapper'>
       <div class='l_main'>
-  <article id="links" class="post white-box article-type-links" itemscope itemprop="blogPost">
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
 
 
@@ -302,8 +304,8 @@
         
   
     <h1 class="title">
-      <a href="/friends/index.html">
-        我的朋友们
+      <a href="/2020/05/08/Dailyfresh-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C-02/">
+        Dailyfresh-用户注册
       </a>
     </h1>
   
@@ -334,7 +336,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-15</p>
+    <p>2020-05-08</p>
   </a>
 </div>
 
@@ -342,6 +344,14 @@
         
           
             
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Django/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Django</p>
+    </a>
+  </div>
+
 
           
         
@@ -371,7 +381,7 @@
         <span class="post-meta-item-icon">
           <i class="fa fa-keyboard"></i>
           <span class="post-meta-item-text">  字数统计: </span>
-          <span class="post-count">28字</span>
+          <span class="post-count">773字</span>
         </span>
       </span>
       &nbsp; | &nbsp;
@@ -379,7 +389,7 @@
         <span class="post-meta-item-icon">
           <i class="fa fa-hourglass-half"></i>
           <span class="post-meta-item-text">  阅读时长≈</span>
-          <span class="post-count">1分</span>
+          <span class="post-count">3分</span>
         </span>
       </span>
     </div>
@@ -401,87 +411,157 @@
   </section>
 
 
-      <section class="article typo l_friends">
-        
-          
-            
-              <div class='friends-group'>
-                
-                  <br>
-                  <h3 class='friend-header'>
-                    
-                      <i class="fas fa-user-tie fa-fw" aria-hidden="true"></i>
-                    
-                    技术大佬
-                  </h3>
-                
-                <div class='friend-content'>
-                  
-                    <a class='friend-card' style='background:#3E74C9; color:#fff'
-                      target="_blank" rel="external nofollow noopener noreferrer" href='/'>
-                      <div class='friend-left'>
-                        <img class='avatar' src='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png' data-echo='https://img.vim-cn.com/a4/87a96e2e01b1180bba1e76e190df5220378c1a.png'/>
-                      </div>
-                      <div class='friend-right'>
-                        <p class="friend-name"></p>
-                        
-                          <div class='friend-tags-wrapper'>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签1</p>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签2</p>
-                          
-                          </div>
-                        
-                      </div>
-                    </a>
-                  
-                </div>
-              </div>
-            
-          
-            
-              <div class='friends-group'>
-                
-                  <br>
-                  <h3 class='friend-header'>
-                    
-                      <i class="fas fa-user-tie fa-fw" aria-hidden="true"></i>
-                    
-                    分组2
-                  </h3>
-                
-                <div class='friend-content'>
-                  
-                    <a class='friend-card' style='background:#3E74C9; color:#fff'
-                      target="_blank" rel="external nofollow noopener noreferrer" href='/'>
-                      <div class='friend-left'>
-                        <img class='avatar' src='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png' data-echo='https://img.vim-cn.com/a4/87a96e2e01b1180bba1e76e190df5220378c1a.png'/>
-                      </div>
-                      <div class='friend-right'>
-                        <p class="friend-name"></p>
-                        
-                          <div class='friend-tags-wrapper'>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签1</p>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签2</p>
-                          
-                          </div>
-                        
-                      </div>
-                    </a>
-                  
-                </div>
-              </div>
-            
-          
-        
-        <br><br>
-        <p>这里可以写友链页面下方的文字备注，例如自己的友链规范、示例等。</p>
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>该部分主要完成用户的注册，以及主页的显示</li>
+</ul>
+<h1 id="后端业务逻辑"><a href="#后端业务逻辑" class="headerlink" title="后端业务逻辑"></a>后端业务逻辑</h1><ul>
+<li><p>修改 goods和user中的视图（views）以及路由（urls）</p>
+<img src="https://i.loli.net/2020/05/08/bsco2i5NavgBq8x.png" alt="截屏2020-05-08 下午8.46.54.png" style="zoom:33%;" />
+</li>
+<li><p><code>goods</code>中指定商品的主页，当用户注册完成之后返回到网站主页</p>
+<ul>
+<li><p><code>urls.py</code>如下，在本地运行时访问<code>http://127.0.0.1:8000/</code>查看</p>
+</li>
+<li><p><code>urlpatterns</code> 中配置路由的的模式，将第一个参数与django应用下的<code>urls.py</code> 中的路由进行拼接，也可传递正则表达到对应的视图函数中进行处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include, re_path</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> goods <span class="keyword">import</span> views</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  	<span class="comment"># 设置路由。设置路由处理函数， 设置名称</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">''</span>, views.index, name=<span class="string">'index'</span>),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+</li>
+<li><p><code>views.py</code>如下, 接收到请求之后返回index主页</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create your views here.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""首页"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> render(request, <span class="string">'index.html'</span>)</span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>users</code>中提供用户注册业务逻辑，使用类视图的方法创建视图函数。在类视图中提供<code>get</code>和<code>post</code>函数处理<code>get</code>和<code>post</code>请求。如果你有多个类似的视图需要编写，那么你就可以发挥子类的继承和复写神操作了，分分钟整出个新的视图来。或者直接在URLConf中修改参数！或者两种操作同时使用！</p>
+<p><strong>类视图适用于大量重复性的视图编写工作</strong>，在简单的场景下，没几个视图需要编写，或者各个视图差别很大的情况时，还是函数视图更有效！</p>
+<ul>
+<li><p><code>urls.py</code> 如下, <code>itsdangerous</code>用于生成token对数据进行打包加密</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render, redirect</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> user.models <span class="keyword">import</span> User</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.views.generic <span class="keyword">import</span> View</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 反向解析</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> reverse</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itsdangerous <span class="keyword">import</span> TimedJSONWebSignatureSerializer <span class="keyword">as</span> Serializer</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RegisterView</span><span class="params">(View)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""注册"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, request)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> render(request, <span class="string">'register.html'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, request)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"""进行注册处理"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 接收数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        username = request.POST.get(<span class="string">'user_name'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        password = request.POST.get(<span class="string">'pwd'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        email = request.POST.get(<span class="string">'email'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        allow = request.POST.get(<span class="string">'allow'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 进行数据校验</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> all([username, password, email]):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'register.html'</span>, &#123;<span class="string">'errmsg'</span>: <span class="string">'数据不完整，SB'</span>&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">r'^[a-z0-9][\w.\-]*@[a-z0-9\-]+(\.[a-z]&#123;2,5&#125;)&#123;1,2&#125;$'</span>, email):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'register.html'</span>, &#123;<span class="string">'errmsg'</span>: <span class="string">'邮箱格式不正确'</span>&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> allow != <span class="string">'on'</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'register.html'</span>, &#123;<span class="string">'errmsg'</span>: <span class="string">'请同意协议'</span>&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 进行业务处理， 进行用户注册</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">#</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># user = User()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># user.username = username</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># user.password = password</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># user.save()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">try</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            user = User.objects.get(username=username)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">except</span> User.DoesNotExist:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">            <span class="comment"># 用户不存在</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">            user = <span class="literal">None</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> user:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">            <span class="comment"># 用户名已存在</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'register.html'</span>, &#123;<span class="string">'errmsg'</span>: <span class="string">'用户名已存在'</span>&#125;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        user = User.objects.create_user(username, email, password)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        user.is_active = <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">        user.save()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 进行用户验证处理</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 											设置密钥，             设置生命周期，单位为s</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        serializer = Serializer(settings.SECRET_KEY, <span class="number">3600</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">        info = &#123;<span class="string">'confirm'</span>: user.id&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 将数据进行加密并生成tocken， 解密时使用load(tocken)返回加密的数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">        tocken = serializer.dumps(info)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 发送邮件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 跳转到首页</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> redirect(reverse(<span class="string">'goods:index'</span>))</span></pre></td></tr></table></figure>
+</li>
+<li><p><code>views.py</code>如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include, re_path</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> user.views <span class="keyword">import</span> RegisterView</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'register'</span>, RegisterView.as_view(), name=<span class="string">'register'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment"># path('register', views.register, name='register'), # 注册</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
 
-      </section>
+
+
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+        <br>
+        <p>感谢🙏你的阅读，May you have a good day！</p>
+
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-08T21:45:47+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年5月8日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Dailyfresh/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Dailyfresh</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/08/Dailyfresh-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C-02/&title=Dailyfresh-用户注册 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/05/08/Dailyfresh-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C-02/&title=Dailyfresh-用户注册 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/08/Dailyfresh-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C-02/&title=Dailyfresh-用户注册 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/05/06/Dailyfresh-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA-01/" rel="prev" title="Dailyfresh-项目搭建">
+                                  
+                                      Dailyfresh-项目搭建
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Dailyfresh/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Dailyfresh</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
   </article>
+
+
 
   <!-- 显示推荐文章和评论 -->
 
@@ -503,6 +583,21 @@
     </section>
   </article>
 
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Dailyfresh-用户注册',
+      tools: true
+    }
+  </script>
 
 
 </div>
@@ -721,6 +816,20 @@
           
             
               
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer noopener" href="javascript:void(0)" target="_blank"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后端业务逻辑"><span class="toc-text">后端业务逻辑</span></a></li></ol>
+    </div>
+  </section>
+
 
             
           
@@ -1322,18 +1431,6 @@
   <script src="/js/search.js"></script>
 
 
-
-  <script src="https://cdn.jsdelivr.net/gh/toddmotto/echo@1.7.3/src/echo.js"></script>
-  <script>
-    echo.init({
-      offset: 100,
-      throttle: 250,
-      unload: false,
-      callback: function (element, op) {
-        // console.log(element, 'has been', op + 'ed');
-      }
-    });
-  </script>
 
 
 <!-- 复制 -->

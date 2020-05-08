@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>我的朋友们 | Forpaolo</title>
+  <title>Dailyfresh-项目搭建 | Forpaolo</title>
   
   
   <meta name="description" content="又见暮雪亦白头">
@@ -48,7 +48,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover links half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'>Forpaolo</h1>
@@ -290,7 +290,9 @@
   <div class="l_body">
     <div class='body-wrapper'>
       <div class='l_main'>
-  <article id="links" class="post white-box article-type-links" itemscope itemprop="blogPost">
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
 
 
@@ -302,8 +304,8 @@
         
   
     <h1 class="title">
-      <a href="/friends/index.html">
-        我的朋友们
+      <a href="/2020/05/06/Dailyfresh-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA-01/">
+        Dailyfresh-项目搭建
       </a>
     </h1>
   
@@ -334,7 +336,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-15</p>
+    <p>2020-05-06</p>
   </a>
 </div>
 
@@ -342,6 +344,14 @@
         
           
             
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/Django/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Django</p>
+    </a>
+  </div>
+
 
           
         
@@ -371,7 +381,7 @@
         <span class="post-meta-item-icon">
           <i class="fa fa-keyboard"></i>
           <span class="post-meta-item-text">  字数统计: </span>
-          <span class="post-count">28字</span>
+          <span class="post-count">902字</span>
         </span>
       </span>
       &nbsp; | &nbsp;
@@ -379,7 +389,7 @@
         <span class="post-meta-item-icon">
           <i class="fa fa-hourglass-half"></i>
           <span class="post-meta-item-text">  阅读时长≈</span>
-          <span class="post-count">1分</span>
+          <span class="post-count">4分</span>
         </span>
       </span>
     </div>
@@ -401,87 +411,222 @@
   </section>
 
 
-      <section class="article typo l_friends">
-        
-          
-            
-              <div class='friends-group'>
-                
-                  <br>
-                  <h3 class='friend-header'>
-                    
-                      <i class="fas fa-user-tie fa-fw" aria-hidden="true"></i>
-                    
-                    技术大佬
-                  </h3>
-                
-                <div class='friend-content'>
-                  
-                    <a class='friend-card' style='background:#3E74C9; color:#fff'
-                      target="_blank" rel="external nofollow noopener noreferrer" href='/'>
-                      <div class='friend-left'>
-                        <img class='avatar' src='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png' data-echo='https://img.vim-cn.com/a4/87a96e2e01b1180bba1e76e190df5220378c1a.png'/>
-                      </div>
-                      <div class='friend-right'>
-                        <p class="friend-name"></p>
-                        
-                          <div class='friend-tags-wrapper'>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签1</p>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签2</p>
-                          
-                          </div>
-                        
-                      </div>
-                    </a>
-                  
-                </div>
-              </div>
-            
-          
-            
-              <div class='friends-group'>
-                
-                  <br>
-                  <h3 class='friend-header'>
-                    
-                      <i class="fas fa-user-tie fa-fw" aria-hidden="true"></i>
-                    
-                    分组2
-                  </h3>
-                
-                <div class='friend-content'>
-                  
-                    <a class='friend-card' style='background:#3E74C9; color:#fff'
-                      target="_blank" rel="external nofollow noopener noreferrer" href='/'>
-                      <div class='friend-left'>
-                        <img class='avatar' src='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png' data-echo='https://img.vim-cn.com/a4/87a96e2e01b1180bba1e76e190df5220378c1a.png'/>
-                      </div>
-                      <div class='friend-right'>
-                        <p class="friend-name"></p>
-                        
-                          <div class='friend-tags-wrapper'>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签1</p>
-                          
-                            <p class="tags"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>标签2</p>
-                          
-                          </div>
-                        
-                      </div>
-                    </a>
-                  
-                </div>
-              </div>
-            
-          
-        
-        <br><br>
-        <p>这里可以写友链页面下方的文字备注，例如自己的友链规范、示例等。</p>
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h1 id="Django-项目创建流程"><a href="#Django-项目创建流程" class="headerlink" title="Django 项目创建流程"></a>Django 项目创建流程</h1><ol>
+<li><p><code>django-admin startproject dailyfresh</code> 创建Django目录</p>
+</li>
+<li><p><code>python manage.py starapp user</code> 创建对应的app，依次创建cart, goods,order,user 四个app</p>
+</li>
+<li><p>在pycharm中导入对应的Django项目，并制定python解析器为当前的虚拟环境</p>
+<p>![](<a href="https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC截屏2020-05-06" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC截屏2020-05-06</a> 下午9.07.22.png)</p>
+</li>
+<li><p>创建<code>app</code> python package， 将上述创建完成的4个app放入到app文件夹下</p>
+</li>
+<li><p>配置settings.py 文件</p>
+<ol>
+<li><p>指定apps文件夹搜索路径，为了能在<code>INSTALLED_APPS</code> 字段中直接使用对应app，而不是通过<code>app.user</code>形式导入已经安装的app</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sys.path.insert(<span class="number">0</span>, os.path.join(BASE_DIR, <span class="string">'apps'</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'django.contrib.admin'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'django.contrib.auth'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'django.contrib.messages'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'user'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'goods'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'cart'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'order'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+</li>
+<li><p>配置数据库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'default'</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'NAME'</span>: <span class="string">"dailyfresh"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'USER'</span>: <span class="string">'root'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">"xxxxx"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'HOST'</span>: <span class="string">"127.0.0.1"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'OPTIONS'</span>: &#123;<span class="string">'init_command'</span>: <span class="string">'SET default_storage_engine=INNODB;'</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
-      </section>
+<ul>
+<li>这里配置的是本地的mysql</li>
+</ul>
+</li>
+<li><p>修改Django-admin 后台的语言</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">LANGUAGE_CODE = <span class="string">'zh-hans'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">TIME_ZONE = <span class="string">'Asia/Shanghai'</span></span></pre></td></tr></table></figure>
+</li>
+<li><p>添加静态文件的路径, 由于是前后端不分离的项目需创建static文件夹存放前端页面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">STATIC_URL = <span class="string">'/static/'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">STATICFILES_DIRS = [os.path.join(BASE_DIR), <span class="string">'static'</span>]</span></pre></td></tr></table></figure>
+</li>
+<li><p>添加模版文件路径, 存放路由视图（此处与Flask类似）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">TEMPLATES = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'BACKEND'</span>: <span class="string">'django.template.backends.django.DjangoTemplates'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'DIRS'</span>: [os.path.join(BASE_DIR), <span class="string">'templates'</span>],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'APP_DIRS'</span>: <span class="literal">True</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="string">'OPTIONS'</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="string">'context_processors'</span>: [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                <span class="string">'django.template.context_processors.debug'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="string">'django.template.context_processors.request'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                <span class="string">'django.contrib.auth.context_processors.auth'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="string">'django.contrib.messages.context_processors.messages'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            ],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+</li>
+<li><p><code>urls.py</code> 配置</p>
+<ul>
+<li><p>增加app 路由地址，商品页面是放在主页的位置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'user/'</span>, include((<span class="string">'user.urls'</span>, <span class="string">'user'</span>), namespace=<span class="string">'user'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'cart/'</span>, include((<span class="string">'cart.urls'</span>, <span class="string">'cart'</span>), namespace=<span class="string">'cart'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'order/'</span>, include((<span class="string">'order.urls'</span>, <span class="string">'order'</span>), namespace=<span class="string">'order'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">''</span>, include((<span class="string">'goods.urls'</span>, <span class="string">'goods'</span>), namespace=<span class="string">'goods'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+</li>
+<li><p>在app中增加 <code>urls.py</code>文件基础配置如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include, re_path</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>增加数据库基类模型, 创建db python package</p>
+<ul>
+<li><p>添加<code>base_model.py</code>文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseModel</span><span class="params">(models.Model)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""模型抽象基类,为所有继承此基类的类加入如下三个字段"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="literal">True</span>, verbose_name=<span class="string">'创建时间'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    update_time = models.DateTimeField(auto_now=<span class="literal">True</span>, verbose_name=<span class="string">'更新时间'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    is_delete = models.BooleanField(default=<span class="literal">False</span>, verbose_name=<span class="string">'是否删除'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"""说明是个抽象模型类"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        abstract = <span class="literal">True</span></span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>富文本编辑器配置</p>
+<ul>
+<li><p>安装django-tinymce</p>
+<p><code>pip install django-tinymce</code></p>
+</li>
+<li><p>在<code>dailyfresh-&gt;urls.py</code>中配置<code>tinymce</code> 路由</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'tinymce/'</span>, include((<span class="string">'tinymce.urls'</span>, <span class="string">'tinymce'</span>))),  <span class="comment"># the routing of tinymce</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'search/'</span>, include((<span class="string">'haystack.urls'</span>, <span class="string">'haystack'</span>))),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'user/'</span>, include((<span class="string">'user.urls'</span>, <span class="string">'user'</span>), namespace=<span class="string">'user'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'cart/'</span>, include((<span class="string">'cart.urls'</span>, <span class="string">'cart'</span>), namespace=<span class="string">'cart'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">'order/'</span>, include((<span class="string">'order.urls'</span>, <span class="string">'order'</span>), namespace=<span class="string">'order'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    path(<span class="string">''</span>, include((<span class="string">'goods.urls'</span>, <span class="string">'goods'</span>), namespace=<span class="string">'goods'</span>)),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">]</span></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>settings.py</code>添加富文本配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># STATIC_ROOT = '/var/www/html/Django2_dailyfresh/static'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># The rich text editor configuration</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://django-tinymce.readthedocs.io/en/latest/installation.html</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">TINYMCE_DEFAULT_CONFIG = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'theme'</span>: <span class="string">'advanced'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'width'</span>: <span class="number">600</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'height'</span>: <span class="number">400</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>apps 数据库模型添加，此处django-2.x 与django-1.x 在外键设置上存在区别</p>
+<p>​    <code>user = models.ForeignKey(&#39;User&#39;, verbose_name=&#39;所属账户&#39;, on_delete=models.CASCADE)</code></p>
+<ul>
+<li><p>在models.py中添加对饮的数据库模型</p>
+</li>
+<li><p>使用Navicat 创建数据库<code>dailyfresh</code></p>
+<img src="https://i.loli.net/2020/05/06/VA6F2UdhRPCxvTs.png" alt="截屏2020-05-06 下午10.09.13.png" style="zoom:50%;" />
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>- 在pycharm中打开Tool-&gt;run manage.py 分别输出makemigrations 生成数据库迁移文件
+
+  输入migrate 进行数据库迁移
+
+  &lt;img src=&quot;https://i.loli.net/2020/05/06/xMQdwFDRibOm7ht.png&quot; alt=&quot;截屏2020-05-06 下午10.12.03.png&quot; style=&quot;zoom: 33%;&quot; /&gt;
+
+  - 迁移之后的数据表如下
+
+    &lt;img src=&quot;https://i.loli.net/2020/05/06/Y1fWucGMJQqAz48.png&quot; alt=&quot;截屏2020-05-06 下午10.18.57.png&quot; style=&quot;zoom: ;&quot; /&gt;</code></pre>
+      </div>
+      
+        <br>
+        <p>感谢🙏你的阅读，May you have a good day！</p>
+
+      
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-08T20:43:33+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年5月8日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Dailyfresh/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Dailyfresh</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/06/Dailyfresh-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA-01/&title=Dailyfresh-项目搭建 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/05/06/Dailyfresh-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA-01/&title=Dailyfresh-项目搭建 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/06/Dailyfresh-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA-01/&title=Dailyfresh-项目搭建 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2020/05/08/Dailyfresh-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C-02/" rel="prev" title="Dailyfresh-用户注册">
+                                
+                                    Dailyfresh-用户注册
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/Dailyfresh/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Dailyfresh</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/05/04/%E5%A4%A9%E5%A4%A9%E7%94%9F%E9%B2%9CD2/" rel="prev" title="天天生鲜D2">
+                                  
+                                      天天生鲜D2
+                                  
+                              </a>
+                          </h4>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
   </article>
+
+
 
   <!-- 显示推荐文章和评论 -->
 
@@ -503,6 +648,21 @@
     </section>
   </article>
 
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Dailyfresh-项目搭建',
+      tools: true
+    }
+  </script>
 
 
 </div>
@@ -721,6 +881,20 @@
           
             
               
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer noopener" href="javascript:void(0)" target="_blank"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-项目创建流程"><span class="toc-text">Django 项目创建流程</span></a></li></ol>
+    </div>
+  </section>
+
 
             
           
@@ -1322,18 +1496,6 @@
   <script src="/js/search.js"></script>
 
 
-
-  <script src="https://cdn.jsdelivr.net/gh/toddmotto/echo@1.7.3/src/echo.js"></script>
-  <script>
-    echo.init({
-      offset: 100,
-      throttle: 250,
-      unload: false,
-      callback: function (element, op) {
-        // console.log(element, 'has been', op + 'ed');
-      }
-    });
-  </script>
 
 
 <!-- 复制 -->
