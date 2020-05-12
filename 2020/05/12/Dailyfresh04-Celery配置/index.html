@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>操作系统 | Forpaolo</title>
+  <title>Dailyfresh04-Celery配置 | Forpaolo</title>
   
   
   <meta name="description" content="又见暮雪亦白头">
@@ -304,8 +304,8 @@
         
   
     <h1 class="title">
-      <a href="/2020/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-        操作系统
+      <a href="/2020/05/12/Dailyfresh04-Celery%E9%85%8D%E7%BD%AE/">
+        Dailyfresh04-Celery配置
       </a>
     </h1>
   
@@ -336,7 +336,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-03-04</p>
+    <p>2020-05-12</p>
   </a>
 </div>
 
@@ -346,9 +346,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/Python%E5%9F%BA%E7%A1%80/' rel="nofollow">
+    <a href='/categories/Django/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Python基础</p>
+      <p>Django</p>
     </a>
   </div>
 
@@ -381,7 +381,7 @@
         <span class="post-meta-item-icon">
           <i class="fa fa-keyboard"></i>
           <span class="post-meta-item-text">  字数统计: </span>
-          <span class="post-count">3.4k字</span>
+          <span class="post-count">1k字</span>
         </span>
       </span>
       &nbsp; | &nbsp;
@@ -389,7 +389,7 @@
         <span class="post-meta-item-icon">
           <i class="fa fa-hourglass-half"></i>
           <span class="post-meta-item-text">  阅读时长≈</span>
-          <span class="post-count">12分</span>
+          <span class="post-count">4分</span>
         </span>
       </span>
     </div>
@@ -413,193 +413,44 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h1 id="1-select-poll和epoll"><a href="#1-select-poll和epoll" class="headerlink" title="1. select, poll和epoll"></a>1. select, poll和epoll</h1><ul>
-<li><p>select，poll，epoll都是IO多路复用的机制。I/O多路复用就通过一种机制，可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。<strong>但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的</strong>，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。</p>
-</li>
-<li><p><a href="http://www.cnblogs.com/Anker/p/3265058.html" target="_blank" rel="noopener">selec,poll和epoll区别总结</a></p>
-</li>
-<li><p>基本上select有3个缺点:</p>
-<ol>
-<li>连接数受限</li>
-<li>查找配对速度慢</li>
-<li>数据由内核拷贝到用户态</li>
-</ol>
-</li>
-<li><p>IO复用概念</p>
+        <h1 id="1-Celery-介绍（client-broker-worker）"><a href="#1-Celery-介绍（client-broker-worker）" class="headerlink" title="1. Celery 介绍（client/broker/worker）"></a>1. Celery 介绍（client/broker/worker）</h1><ul>
+<li><p>Celery是一个功能完备即插即用的<strong>任务队列</strong>。它使得我们不需要考虑复杂的问题，使用非常简单。celery看起来似乎很庞大，本章节我们先对其进行简单的了解，然后再去学习其他一些高级特性。 celery适用异步处理问题，当发送邮件、或者文件上传, 图像处理等等一些比较耗时的操作，我们可将其异步执行，这样用户不需要等待很久，提高用户体验。 celery的特点是：</p>
 <ul>
-<li><p>IO多路复用是指内核一旦发现进程指定的一个或者多个IO条件准备读取，它就通知该进程。IO多路复用适用如下场合：</p>
-<p>（1）当客户处理多个描述字时（一般是交互式输入和网络套接口），必须使用I/O复用。</p>
-<p>  　　（2）当一个客户同时处理多个套接口时，而这种情况是可能的，但很少出现。</p>
-<p>  　　（3）如果一个TCP服务器既要处理监听套接口，又要处理已连接套接口，一般也要用到I/O复用。</p>
-<p>  　　（4）如果一个服务器即要处理TCP，又要处理UDP，一般要使用I/O复用。</p>
-<p>  　　（5）如果一个服务器要处理多个服务或多个协议，一般要使用I/O复用。</p>
-</li>
-<li><p>与多进程和多线程技术相比，I/O多路复用技术的最大优势是系统开销小，系统不必创建进程/线程，也不必维护这些进程/线程，从而大大减小了系统的开销。</p>
-</li>
+<li><strong>简单</strong>，易于使用和维护，有丰富的文档。</li>
+<li><strong>高效</strong>，单个celery进程每分钟可以处理数百万个任务。</li>
+<li><strong>灵活</strong>，celery中几乎每个部分都可以自定义扩展。</li>
 </ul>
 </li>
-<li><p>select函数</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/select.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> maxfdp1,fd_set *readset,fd_set *writeset,fd_set *exceptset,<span class="keyword">const</span> struct timeval *timeout)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function">  <span class="comment">// success return 0， else return -1</span></span></span></pre></td></tr></table></figure>
-
-
-
+<li><p>celery通过消息进行通信，通常使用一个叫<strong>Broker</strong>(中间人)来协助client(任务的发出者)和worker(任务的处理者). clients发出消息到队列中，broker将队列中的信息派发给worker来处理。一个celery系统可以包含很多的worker和broker，可增强横向扩展性和高可用性能。</p>
+</li>
+<li><p>client 任务发起者，Django应用调用celery任务</p>
+</li>
+<li><p>broker 任务中间人，处理任务队列（redis/RabbitMQ）</p>
+</li>
+<li><p>worker 任务处理者，启动celery任务</p>
+</li>
+<li><p>使用 <code>celery -A tasks worker --loglevel=info</code> 启动celery任务，worker连接broker 。其中<code>tasks</code>指的是<code>tasks.py</code>的文件名</p>
+</li>
+<li><p>启动完成及接收任务会有如下打印信息</p>
+<p>[2020-05-12 19:58:48,857: INFO/MainProcess] <a href="mailto:celery@MacOSdeMacBook-Pro.local" target="_blank" rel="noopener">celery@MacOSdeMacBook-Pro.local</a> ready.<br>[2020-05-12 20:03:33,698: INFO/MainProcess] Received task: celery_tasks.tasks.send_register_active_email[208e5f08-597a-48bf-8d35-339361176851]<br>[2020-05-12 20:03:34,405: INFO/ForkPoolWorker-8] Task celery_tasks.tasks.send_register_active_email[208e5f08-597a-48bf-8d35-339361176851] succeeded in 0.7055033420911059s: None</p>
 </li>
 </ul>
+<h1 id="2-图解"><a href="#2-图解" class="headerlink" title="2. 图解"></a>2. 图解</h1><p><img src="https://i.loli.net/2020/05/12/n2KgkeT6pmjHAoR.png" alt="截屏2020-05-12 下午8.30.01.png"></p>
+<h1 id="3-创建应用"><a href="#3-创建应用" class="headerlink" title="3. 创建应用"></a>3. 创建应用</h1><ul>
+<li><p>新建一个python包为<code>celery_tasks</code>，新建<code>tasks.py</code>文件</p>
+</li>
+<li><p>添加Django项目配置参数</p>
 <ul>
-<li><p>poll改善了第一个缺点</p>
+<li><pre><code class="python">os.environ.setdefault(<span class="string">'DJANGO_SETTINGS_MODULE'</span>, <span class="string">'dailyfresh.settings'</span>)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">- 这里有一个坑，我直接使用导入项目配置参数，执行celery时会提示</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#96;Error: </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  Unable to load celery application.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  The module dailyfresh was not found.&#96;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">- 原因还是对于这个任务py脚本来说，在当前环境变量中找不到Django项目的路径（项目名）。查阅了官方的文档，发现也没有添加路径，但是能够正常执行celery任务。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  https:&#x2F;&#x2F;docs.celeryproject.org&#x2F;en&#x2F;stable&#x2F;django&#x2F;first-steps-with-django.html</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  &#96;&#96;&#96;python</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  from __future__ import absolute_import, unicode_literals</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  import os</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  from celery import Celery</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  # set the default Django settings module for the &#39;celery&#39; program.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  os.environ.setdefault(&#39;DJANGO_SETTINGS_MODULE&#39;, &#39;proj.settings&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  app &#x3D; Celery(&#39;proj&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">  # Using a string here means the worker doesn&#39;t have to serialize</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  # the configuration object to child processes.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  # - namespace&#x3D;&#39;CELERY&#39; means all celery-related configuration keys</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  #   should have a &#96;CELERY_&#96; prefix.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  app.config_from_object(&#39;django.conf:settings&#39;, namespace&#x3D;&#39;CELERY&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">  # Load task modules from all registered Django app configs.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">  app.autodiscover_tasks()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">  @app.task(bind&#x3D;True)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">  def debug_task(self):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">      print(&#39;Request: &#123;0!r&#125;&#39;.format(self.request))</span></pre></td></tr></table></figure></code></pre>
 </li>
-<li><p>epoll改了三个缺点</p>
-<ul>
-<li><p><a href="https://www.cnblogs.com/my_life/articles/3968782.html" target="_blank" rel="noopener">epoll解释</a></p>
+<li><p>现在的做法是直接添加项目的工程路径到系统环境下, 其中<code>sys.path.append</code>添加一次之后，在停止工程之后会自动删除</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core.mail <span class="keyword">import</span> send_mail</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.template <span class="keyword">import</span> loader, RequestContext</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># broker和worker在同一台机子上则需要加上本段代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> django</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># pwd = os.path.dirname(os.path.realpath(__file__))</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">sys.path.append(<span class="string">'/Users/macos/workspace/dailyfresh/'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># sys.path.append(pwd+'../')</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">print(sys.path)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">os.environ.setdefault(<span class="string">'DJANGO_SETTINGS_MODULE'</span>, <span class="string">'dailyfresh.settings'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">django.setup()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> goods.models <span class="keyword">import</span> *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django_redis <span class="keyword">import</span> get_redis_connection</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定celery 中间人</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">app = Celery(<span class="string">'celery_tasks.tasks'</span>, broker=<span class="string">'redis://127.0.0.1:6379/0'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建celery 处理者</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.task</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_register_active_email</span><span class="params">(to_email, username, token)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""define task func"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    subject = <span class="string">'天天生鲜欢迎信息'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    message = <span class="string">''</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    html_message = <span class="string">'&lt;h1&gt;%s, 欢迎成为天天生鲜注册会员&lt;h1&gt;'</span> \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                   <span class="string">'请点击下面链接激活账户&lt;br/&gt;'</span> \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">                   <span class="string">'&lt;a href="http://127.0.0.1:8000/user/active/%s"&gt;'</span> \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                   <span class="string">'http://127.0.0.1:8000/user/active/%s&lt;/a&gt;'</span> % (username, token, token)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    sender = settings.EMAIL_FROM</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    receiver = [to_email]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    send_mail(subject, message=message, from_email=sender, recipient_list=receiver, html_message=html_message)</span></pre></td></tr></table></figure>
 </li>
-<li><p>epoll是<a href="http://www.cppfans.org/tag/linux" target="_blank" rel="noopener">Linux</a>下多路复用IO接口select/poll的增强版本，它能显著提高程序在大量并发连接中只有少量活跃的情况下的系统CPU利用率，因为它会复用文件描述符集 合来传递结果而不用迫使开发者每次等待事件之前都必须重新准备要被侦听的文件描述符集合，另一点原因就是获取事件的时候，它无须遍历整个被侦听的描述符 集，只要遍历那些被内核IO事件异步唤醒而加入Ready队列的描述符集合就行了。epoll除了提供select/poll那种IO事件的电平触发 （Level Triggered）外，还提供了边沿触发（Edge Triggered），这就使得用户空间程序有可能缓存IO状态，减少epoll_wait/epoll_pwait的调用，提高应用程序效率。<a href="http://www.cppfans.org/tag/linux" target="_blank" rel="noopener">Linux</a>2.6内核中对/dev/epoll设备的访问的封装（system epoll）。这个使我们开发网络应用程序更加简单，并且更加高效。</p>
-</li>
-<li><p><strong>LT可以理解为水平触发，只要有数据可以读，不管怎样都会通知。而ET为边缘触发，只有状态发生变化时才会通知，可以理解为电平变化</strong>。水平触发数据存在可读高电平，边沿触发需状态发声变化，由高到低。</p>
-</li>
-<li><p>SYNOPSIS</p>
-<pre><code>`#include &lt;sys/epoll.h&gt;`</code></pre></li>
-<li><p>DESCRIPTION</p>
-<ul>
-<li><p>The epoll API performs a similar task to poll(2): monitoring multiple file descriptors to see if I/O is possible on any of them.  The epoll API can be used either as an edge-triggered or a level-triggered interface and scales  well to  large  numbers  of  watched  file descriptors.  The following system calls are provided to create and manage an epoll instance:</p>
-<ul>
-<li><p>epoll_create(2) creates a new epoll instance and returns a file descriptor referring  to  that  instance.   (The<br>more recent epoll_create1(2) extends the functionality of epoll_create(2).)</p>
-</li>
-<li><p>Interest  in  particular file descriptors is then registered via epoll_ctl(2).  The set of file descriptors cur‐<br>rently registered on an epoll instance is sometimes called an epoll set.</p>
+<li><p>在发送邮件视图中导入<code>from celery_tasks.tasks import send_register_active_email</code>, 之后调用celery任务执行函数<code>send_register_active_email.delay(email, username, tocken)</code> 发送异步邮件</p>
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li><p>epoll_wait(2) waits for I/O events, blocking the calling thread if no events are currently available.</p>
-</li>
-<li><p>有三个关键函数：</p>
-<p>int epoll_create(int size);</p>
-<p>int epoll_ctl(int epfd, int op, int fd, struct epoll_events* event);</p>
-<p>int epoll_wait(int epfd, struct epoll_event* events, int maxevents, int timeout);</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_EVENTS 10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>, <span class="title">events</span>[<span class="title">MAX_EVENTS</span>];</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> listen_sock, conn_sock, nfds, epollfd;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Code to set up listening socket, 'listen_sock',</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">              (socket(), bind(), listen()) omitted */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">epollfd = epoll_create1(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (epollfd == <span class="number">-1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  perror(<span class="string">"epoll_create1"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">exit</span>(EXIT_FAILURE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">ev.events = EPOLLIN;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">ev.data.fd = listen_sock;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (epoll_ctl(epollfd, EPOLL_CTL_ADD, listen_sock, &amp;ev) == <span class="number">-1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  perror(<span class="string">"epoll_ctl: listen_sock"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  <span class="built_in">exit</span>(EXIT_FAILURE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (;;) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  nfds = epoll_wait(epollfd, events, MAX_EVENTS, <span class="number">-1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">if</span> (nfds == <span class="number">-1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    perror(<span class="string">"epoll_wait"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (n = <span class="number">0</span>; n &lt; nfds; ++n) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (events[n].data.fd == listen_sock) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">      conn_sock = accept(listen_sock,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                         (struct sockaddr *) &amp;addr, &amp;addrlen);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (conn_sock == <span class="number">-1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        perror(<span class="string">"accept"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">      setnonblocking(conn_sock);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">      ev.events = EPOLLIN | EPOLLET;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">      ev.data.fd = conn_sock;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (epoll_ctl(epollfd, EPOLL_CTL_ADD, conn_sock,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">                    &amp;ev) == <span class="number">-1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        perror(<span class="string">"epoll_ctl: conn_sock"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">      &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">      do_use_fd(events[n].data.fd);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></code></pre><h1 id="2-调度算法"><a href="#2-调度算法" class="headerlink" title="2. 调度算法"></a>2. 调度算法</h1><ol>
-<li>先来先服务(FCFS, First Come First Serve)</li>
-<li>短作业优先(SJF, Shortest Job First)</li>
-<li>最高优先权调度(Priority Scheduling)</li>
-<li>时间片轮转(RR, Round Robin)</li>
-<li>多级反馈队列调度(multilevel feedback queue scheduling)</li>
-<li><a href="http://www.jianshu.com/p/6edf8174c1eb" target="_blank" rel="noopener">总结</a></li>
-<li>实时调度算法:<ol>
-<li>最早截至时间优先 EDF</li>
-<li>最低松弛度优先 LLF</li>
-</ol>
-</li>
-</ol>
-<h1 id="3-死锁"><a href="#3-死锁" class="headerlink" title="3.死锁"></a>3.死锁</h1><ul>
-<li><p><a href="https://wizardforcel.gitbooks.io/wangdaokaoyan-os/content/10.html" target="_blank" rel="noopener">王道考研操作系统知识点</a></p>
-</li>
-<li><p><strong>所谓死锁是指多个进程因竞争资源而造成的一种僵局，若无外力作用，这些进程都将无法向前推进。</strong></p>
-</li>
-<li><p>原因</p>
-<ul>
-<li>竞争资源<ul>
-<li>只有对不可剥夺资源的竞争才可能产生死锁，对可剥夺资源的竞争是不会引起死锁的。</li>
-</ul>
-</li>
-<li>程序推进顺序不当<ul>
-<li>进程在运行过程中，请求和释放资源的顺序不当，同样会导致死锁。</li>
-<li>信号量使用不当也会造成死锁。进程间相互等待对方发来的消息，结果也会造成某些进程间无法继续向前推进。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>必要条件</p>
-<ul>
-<li>互斥条件</li>
-<li>请求和保持条件</li>
-<li>不剥夺条件</li>
-<li>环路等待条件</li>
-</ul>
-</li>
-<li><p>处理死锁基本方法</p>
-<ul>
-<li>预防死锁（摒弃除第一个条件之外的条件）</li>
-<li>避免死锁（银行家算法）</li>
-<li>检测死锁（资源分配图）</li>
-<li>解除死锁<ul>
-<li>剥夺资源</li>
-<li>撤销进程</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="4-程序编译与链接"><a href="#4-程序编译与链接" class="headerlink" title="4. 程序编译与链接"></a>4. 程序编译与链接</h1><ul>
-<li><p>Bulid过程可以分解为4个步骤:预处理(Prepressing), 编译(Compilation)、汇编(Assembly)、链接(Linking)</p>
-</li>
-<li><p>以c语言为例:</p>
-<h3 id="1-预处理"><a href="#1-预处理" class="headerlink" title="1 预处理"></a>1 预处理</h3><p>预编译过程主要处理那些源文件中的以“#”开始的预编译指令，主要处理规则有：</p>
-<ol>
-<li>将所有的“#define”删除，并展开所用的宏定义</li>
-<li>处理所有条件预编译指令，比如“#if”、“#ifdef”、 “#elif”、“#endif”</li>
-<li>处理“#include”预编译指令，将被包含的文件插入到该编译指令的位置，注：此过程是递归进行的</li>
-<li>删除所有注释</li>
-<li>添加行号和文件名标识，以便于编译时编译器产生调试用的行号信息以及用于编译时产生编译错误或警告时可显示行号</li>
-<li>保留所有的#pragma编译器指令。</li>
-</ol>
-<h3 id="2-编译"><a href="#2-编译" class="headerlink" title="2 编译"></a>2 编译</h3><p>编译过程就是把预处理完的文件进行一系列的词法分析、语法分析、语义分析及优化后生成相应的汇编代码文件。这个过程是整个程序构建的核心部分。</p>
-<h3 id="3-汇编"><a href="#3-汇编" class="headerlink" title="3 汇编"></a>3 汇编</h3><p>汇编器是将汇编代码转化成机器可以执行的指令，每一条汇编语句几乎都是一条机器指令。经过编译、链接、汇编输出的文件成为目标文件(Object File)</p>
-<h3 id="4-链接"><a href="#4-链接" class="headerlink" title="4 链接"></a>4 链接</h3><p>链接的主要内容就是把各个模块之间相互引用的部分处理好，使各个模块可以正确的拼接。 链接的主要过程包块 地址和空间的分配（Address and Storage Allocation）、符号决议(Symbol Resolution)和重定位(Relocation)等步骤。</p>
-</li>
-</ul>
-<h1 id="5-静态链接和动态链接"><a href="#5-静态链接和动态链接" class="headerlink" title="5. 静态链接和动态链接"></a>5. 静态链接和动态链接</h1><ul>
-<li>静态链接方法：静态链接的时候，载入代码就会把程序会用到的动态代码或动态代码的地址确定下来 静态库的链接可以使用静态链接，动态链接库也可以使用这种方法链接导入库<ul>
-<li>所谓静态链接是指把要调用的函数或者过程链接到可执行文件中，成为可执行文件的一部分。</li>
-<li>换句话说，函数和过程的代码就在程序的exe文件中，该文件包含了运行时所需的全部代码。当多个程序都调用相同函数时，内存中就会存在这个函数的多个拷贝，这样就浪费了宝贵的内存资源。</li>
-<li>生成可执行文件，所有相关的内容均参与编译</li>
-</ul>
-</li>
-<li>动态链接方法：使用这种方式的程序并不在一开始就完成动态链接，<strong>而是直到真正调用动态库代码时</strong>，载入程序才计算(被调用的那部分)动态代码的<strong>逻辑地址</strong>，然后等到某个时候，程序又需要调用另外某块动态代码时，载入程序又去计算这部分代码的逻辑地址，所以，这种方式使程序初始化时间较短，<strong>但运行期间的性能比不上静态链接的程序</strong><ul>
-<li>.so， 在需要的时候调用。</li>
-<li>装载时动态链接<ul>
-<li>在编译之前明确知道动态库调用哪些函数，在编译时目标生成文件只保留必要的链接信息，而不包含动态库的代码。当程序执行到动态库的函数时，根据链接信息加载动态库的代码并在内存中将其链接接入到程序的执行空间中。</li>
-</ul>
-</li>
-<li>运行时动态链接<ul>
-<li>在编译之前并指导将会调用那些DLL函数，完全是在运行过程中根据需要决定调用那个函数，将其加载到内存中（只加载调用的函数进内存），并标识内存地址，其他程序也可以使用该程序，并用LoadLibrary和GetProcAddress动态获得DLL函数的入口地址。（dll在内存中只存在一份，处在运行阶段）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="6-虚拟内存技术"><a href="#6-虚拟内存技术" class="headerlink" title="6.虚拟内存技术"></a>6.虚拟内存技术</h1><ul>
-<li>虚拟存储器是指具有请求调入功能和置换功能,能从逻辑上对内存容量加以扩充的一种存储系统.</li>
-<li>将逻辑地址映射到物理地址上。</li>
-<li>我们可以构造一个大的虚拟内存空间，然后将其映射到较小的物理内存。这个大的虚拟内存空间存储我们进程的所有信息，而当执行进程时，我们只加载需要执行的部分，需要什么再加载什么。这里就需要采用一定的技术，比如按需调页、页面置换、帧分配等，使得进程的执行可以在虚拟内存和物理内存之间进行协调，完成整个程序的执行。</li>
-<li>虚拟内存可以大于物理内存，一般为物理内存的1.5倍到3倍，从而可以运行比物理内存大的程序，进而使得更多的程序可以同时执行，提高了多道程序的程度，增加了CPU的使用率，并且使得进程之间的独立性得到了更好的体现。</li>
-<li>大多数操作系统都使用了虚拟内存，如Windows家族的“虚拟内存”；Linux的“交换空间”等。</li>
-</ul>
-<h1 id="7-分页和分段"><a href="#7-分页和分段" class="headerlink" title="7.分页和分段"></a>7.分页和分段</h1><ul>
-<li><p>分页: 用户程序的地址空间被划分成若干固定大小的区域，称为“页”，相应地，内存空间分成若干个物理块，页和块的大小相等。可将用户程序的任一页放在内存的任一块中，实现了离散分配。</p>
-</li>
-<li><p>分段: 将用户程序地址空间分成若干个大小不等的段，每段可以定义一组相对完整的逻辑信息。存储分配时，以段为单位，段与段在内存中可以不相邻接，也实现了离散分配。</p>
-</li>
-<li><h3 id="分页与分段的主要区别"><a href="#分页与分段的主要区别" class="headerlink" title="分页与分段的主要区别"></a>分页与分段的主要区别</h3><ol>
-<li>页是信息的物理单位,分页是为了实现非连续分配,以便解决内存碎片问题,或者说分页是由于系统管理的需要.段是信息的逻辑单位,它含有一组意义相对完整的信息,分段的目的是为了更好地实现共享,满足用户的需要.</li>
-<li>页的大小固定,由系统确定,将逻辑地址划分为页号和页内地址是由机器硬件实现的.而段的长度却不固定,决定于用户所编写的程序,通常由编译程序在对源程序进行编译时根据信息的性质来划分.</li>
-<li>分页的作业地址空间是一维的.分段的地址空间是二维的.</li>
-</ol>
-</li>
-</ul>
-<h1 id="8-页面置换算法"><a href="#8-页面置换算法" class="headerlink" title="8.页面置换算法"></a>8.页面置换算法</h1><ul>
-<li>最佳置换算法OPT:不可能实现</li>
-<li>先进先出FIFO</li>
-<li>最近最久未使用算法LRU:最近一段时间里最久没有使用过的页面予以置换.</li>
-<li>clock算法</li>
-</ul>
-<h1 id="9-边沿触发和水平触发"><a href="#9-边沿触发和水平触发" class="headerlink" title="9 边沿触发和水平触发"></a>9 边沿触发和水平触发</h1><ul>
-<li><p>边缘触发是指每当状态变化时发生一个 io 事件，条件触发是只要满足条件就发生一个 io 事件</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1></li>
 </ul>
 
       </div>
@@ -617,10 +468,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-04T23:09:10+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-12T20:53:47+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2020年3月4日</p>
+    <p>更新于 2020年5月12日</p>
   </a>
 </div>
 
@@ -629,7 +480,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Interviews/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Interviews</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Dailyfresh/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>Dailyfresh</p></a></div>
 
 
         
@@ -642,7 +493,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/&title=操作系统 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/12/Dailyfresh04-Celery%E9%85%8D%E7%BD%AE/&title=Dailyfresh04-Celery配置 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
           
           >
           
@@ -654,7 +505,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/&title=操作系统 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/05/12/Dailyfresh04-Celery%E9%85%8D%E7%BD%AE/&title=Dailyfresh04-Celery配置 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
           
           >
           
@@ -666,7 +517,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/03/04/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/&title=操作系统 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/12/Dailyfresh04-Celery%E9%85%8D%E7%BD%AE/&title=Dailyfresh04-Celery配置 | Forpaolo&pics=https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg&summary="
           
           >
           
@@ -690,40 +541,21 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/2020/03/05/%E7%BD%91%E7%BB%9C/" rel="prev" title="网络">
-                                
-                                    网络
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/Interview/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Interview</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/2020/03/02/Python%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/" rel="prev" title="Python语言特性">
+                              <a href="/2020/05/10/Dailyfresh03-%E7%94%A8%E6%88%B7%E9%82%AE%E7%AE%B1%E9%AA%8C%E8%AF%81/" rel="prev" title="Dailyfresh03-用户邮箱验证">
                                   
-                                      Python语言特性
+                                      Dailyfresh03-用户邮箱验证
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/Interviews/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Interviews</a>
+                                  <a class="tag" href="/tags/Dailyfresh/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> Dailyfresh</a>
                               </h6>
                           
                       </span>
@@ -767,7 +599,7 @@
 
   <script>
     window.subData = {
-      title: '操作系统',
+      title: 'Dailyfresh04-Celery配置',
       tools: true
     }
   </script>
@@ -999,7 +831,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-select-poll和epoll"><span class="toc-text">1. select, poll和epoll</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-调度算法"><span class="toc-text">2. 调度算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-死锁"><span class="toc-text">3.死锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-程序编译与链接"><span class="toc-text">4. 程序编译与链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-预处理"><span class="toc-text">1 预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-编译"><span class="toc-text">2 编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-汇编"><span class="toc-text">3 汇编</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-链接"><span class="toc-text">4 链接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-静态链接和动态链接"><span class="toc-text">5. 静态链接和动态链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-虚拟内存技术"><span class="toc-text">6.虚拟内存技术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-分页和分段"><span class="toc-text">7.分页和分段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分页与分段的主要区别"><span class="toc-text">分页与分段的主要区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-页面置换算法"><span class="toc-text">8.页面置换算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-边沿触发和水平触发"><span class="toc-text">9 边沿触发和水平触发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text"></span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Celery-介绍（client-broker-worker）"><span class="toc-text">1. Celery 介绍（client/broker/worker）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-图解"><span class="toc-text">2. 图解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-创建应用"><span class="toc-text">3. 创建应用</span></a></li></ol>
     </div>
   </section>
 
