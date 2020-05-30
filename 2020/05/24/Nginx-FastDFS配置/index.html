@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文介绍在Mac以及Linux下安装配置FastDFS 和Nginx 详细步骤以及一些坑1. FastDFS特点​    1）分组存储，简单灵活； ​    2）对等结构，不存在单点； ​    3）文件ID由FastDFS生成，作为文件访问凭证。FastDFS不需要传统的name server或meta server； ​    4）大、中、小文件均可以很好支持，可以存储海量小文件； ​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx+FastDFS配置">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;24&#x2F;Nginx-FastDFS%E9%85%8D%E7%BD%AE&#x2F;index.html">
+<meta property="og:site_name" content="Forpaolo">
+<meta property="og:description" content="本文介绍在Mac以及Linux下安装配置FastDFS 和Nginx 详细步骤以及一些坑1. FastDFS特点​    1）分组存储，简单灵活； ​    2）对等结构，不存在单点； ​    3）文件ID由FastDFS生成，作为文件访问凭证。FastDFS不需要传统的name server或meta server； ​    4）大、中、小文件均可以很好支持，可以存储海量小文件； ​">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;24&#x2F;DeZOujVwq4BPkE6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;24&#x2F;lawZncrsXguBpVY.png">
+<meta property="og:updated_time" content="2020-05-24T12:33:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;05&#x2F;24&#x2F;DeZOujVwq4BPkE6.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/24/Nginx-FastDFS配置/"/>
+
+
+
+
+
+  <title>Nginx+FastDFS配置 | Forpaolo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Forpaolo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/Nginx-FastDFS%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Paolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Forpaolo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nginx+FastDFS配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-24T10:31:42+08:00">
+                2020-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="本文介绍在Mac以及Linux下安装配置FastDFS-和Nginx-详细步骤以及一些坑"><a href="#本文介绍在Mac以及Linux下安装配置FastDFS-和Nginx-详细步骤以及一些坑" class="headerlink" title="本文介绍在Mac以及Linux下安装配置FastDFS 和Nginx 详细步骤以及一些坑"></a>本文介绍在Mac以及Linux下安装配置FastDFS 和Nginx 详细步骤以及一些坑</h1><h1 id="1-FastDFS特点"><a href="#1-FastDFS特点" class="headerlink" title="1. FastDFS特点"></a>1. FastDFS特点</h1><p>​    1）分组存储，简单灵活；</p>
+<p>​    2）对等结构，不存在单点；</p>
+<p>​    3）文件ID由FastDFS生成，作为文件访问凭证。FastDFS不需要传统的name server或meta server；</p>
+<p>​    4）大、中、小文件均可以很好支持，可以存储海量小文件；</p>
+<p>​    5）一台storage支持多块磁盘，支持单盘数据恢复；</p>
+<p>​    6）提供了nginx扩展模块，可以和nginx无缝衔接；</p>
+<p>​    7）支持多线程方式上传和下载文件，支持断点续传；</p>
+<p>​    8）存储服务器上可以保存文件附加属性。</p>
+<h1 id="2-FastDFS系统架构"><a href="#2-FastDFS系统架构" class="headerlink" title="2. FastDFS系统架构"></a>2. FastDFS系统架构</h1><p>​    <img src="https://i.loli.net/2020/05/24/DeZOujVwq4BPkE6.png" alt="architect.png" style="zoom:50%;" /></p>
+<h1 id="3-相关安装包（以上传百度网盘）"><a href="#3-相关安装包（以上传百度网盘）" class="headerlink" title="3. 相关安装包（以上传百度网盘）"></a>3. 相关安装包（以上传百度网盘）</h1><ul>
+<li><p>链接:<a href="https://pan.baidu.com/s/1lcCf2au3l-dsn6MCylFiOQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1lcCf2au3l-dsn6MCylFiOQ</a>  密码:aofl</p>
+</li>
+<li><p>Fastdfs依赖包 <code>fastdfs-master.zip</code></p>
+</li>
+<li><p>Nginx安装包 <code>nginx-1.15.4.tar.gz</code></p>
+</li>
+<li><p>Fastdfs-nginx-module-1.22安装包<code>V1.22.tar.gz</code></p>
+</li>
+<li><p>pcre-8.00安装包<code>pcre-8.00.zip</code></p>
+</li>
+<li><p>Libfastcommon-master安装包 <code>libfastcommon-mater.zip</code></p>
+</li>
+</ul>
+<h1 id="4-mac系统准备工作，Linux可跳过"><a href="#4-mac系统准备工作，Linux可跳过" class="headerlink" title="4. mac系统准备工作，Linux可跳过"></a>4. mac系统准备工作，Linux可跳过</h1><ul>
+<li><p>此部分写在前面，避免之后再重新回来配置</p>
+</li>
+<li><p>在更新到macOs Catalina 10.15之后无法创建<code>/usr/include</code>文件，导致无法之后的nginx无法正常make变异</p>
+</li>
+<li><p>具体步骤如下</p>
+<ol>
+<li>重启电脑按下CMD+R键进入recover模式</li>
+<li>选择命令行工具 </li>
+<li>输入 <code>csrutil disable</code></li>
+<li>安装xcode工具 <code>xcode-select --install</code></li>
+<li>之后再重启进入系统</li>
+<li>输入<code>sudo mount -uw</code> 使得根目录挂在为可读写，否在无法再/usr/下创建文件，机器重启之后失效</li>
+</ol>
+</li>
+</ul>
+<h1 id="5-FastDFS-安装"><a href="#5-FastDFS-安装" class="headerlink" title="5. FastDFS 安装"></a>5. FastDFS 安装</h1><ul>
+<li><p>解压缩<code>libfastcommon-master.zip</code>并进入解压后文件夹进行编译</p>
+</li>
+<li><p>Mac下执行<code>sudo make &amp;&amp; make install</code> ,Linux 执行<code>sudo ./make.sh &amp;&amp; ./make install</code></p>
+</li>
+<li><p>解压缩<code>fastdfs-master.zip</code> 并进入解压之后的文件夹进行编译</p>
+</li>
+<li><p>Mac下执行<code>sudo make &amp;&amp; make install</code> ,Linux 执行<code>sudo ./make.sh &amp;&amp; ./make install</code></p>
+</li>
+</ul>
+<h1 id="6-pcre-安装（PCRE-作用是让-Nginx-支持-Rewrite-功能）"><a href="#6-pcre-安装（PCRE-作用是让-Nginx-支持-Rewrite-功能）" class="headerlink" title="6. pcre 安装（PCRE 作用是让 Nginx 支持 Rewrite 功能）"></a>6. pcre 安装（PCRE 作用是让 Nginx 支持 Rewrite 功能）</h1><ul>
+<li><p>nginx的gzip模块需要zlib库，rewrite模块需要pcre库，ssl模块需要openssl库</p>
+</li>
+<li><p>进入解压缩之后的pcre目录 执行编译安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo .&#x2F;configure</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sudo make &amp;&amp; make install</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="7-设置跟踪服务器tracker"><a href="#7-设置跟踪服务器tracker" class="headerlink" title="7. 设置跟踪服务器tracker"></a>7. 设置跟踪服务器tracker</h1><ul>
+<li><p>拷贝配置备份文件</p>
+<p><code>sudo cp /etc/fdfs/tracker.conf.sample /etc/fdfs/tracker.conf</code></p>
+</li>
+<li><p>创建fastdfs/tracker目录</p>
+<p><code>sudo mkdir -p /Users/macos/workspace/fastdfs/tracker</code></p>
+</li>
+<li><p>编辑/etc/fdfs/tracker.conf配置文件</p>
+<p><code>sudo vim /etc/fdfs/tracker.conf</code></p>
+<p> 修改<code>base_path=/Users/macos/workspace/fastdfs/tracker</code></p>
+</li>
+</ul>
+<h1 id="8-设置存储服务器storage"><a href="#8-设置存储服务器storage" class="headerlink" title="8. 设置存储服务器storage"></a>8. 设置存储服务器storage</h1><ul>
+<li><p>拷贝配置备份文件</p>
+<p><code>sudo cp /etc/fdfs/storage.conf.sample /etc/fdfs/storage.conf</code></p>
+</li>
+<li><p>创建fastdfs/storage目录</p>
+<p><code>sudo mkdir -p /Users/macos/workspace/fastdfs/storage</code></p>
+</li>
+<li><p>编辑/etc/fdfs/storage.conf配置文件</p>
+<p><code>sudo vim /etc/fdfs/storage.conf</code></p>
+</li>
+<li><p>修改内容如下:</p>
+<p><code>base_path=/Users/macos/workspace/fastdfs/storage</code></p>
+<p><code>tracker_server=自己机器的ip地址:22122</code></p>
+</li>
+<li><p>使用ifconfig查看, Mac 下是</p>
+<p>​    <code>en0: flags=8863&lt;UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
+​    options=400&lt;CHANNEL_IO&gt;
+​    ether 18:65:90:cb:7e:c9
+​    inet6 fe80::1062:a410:d32d:a0a9%en0 prefixlen 64 secured scopeid 0x5
+​    inet 192.168.1.101 netmask 0xffffff00 broadcast 192.168.1.255
+​    nd6 options=201&lt;PERFORMNUD,DAD&gt;
+​    media: autoselect
+​    status: active</code></p>
+<ul>
+<li>Linux 下网卡类似于en***，在ubuntu 18.04 和20.04 中可能配置安装net-tools这时候需要手动安装    </li>
+</ul>
+</li>
+</ul>
+<h1 id="9-启动停止tracker和storage"><a href="#9-启动停止tracker和storage" class="headerlink" title="9. 启动停止tracker和storage"></a>9. 启动停止tracker和storage</h1><ul>
+<li><p>在Linux下可使用分别使用下面命令启动停止</p>
+<p><code>sudo service fdfs_trackerd start</code></p>
+<p><code>sudo service fdfs_storaged start</code></p>
+<p><code>sudo service fdfs_trackerd start</code></p>
+<p><code>sudo service fdfs_storaged start</code></p>
+</li>
+</ul>
+<ul>
+<li><p>mac下使用</p>
+<p><code>sudo /usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf</code></p>
+<p><code>sudo /usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf</code></p>
+<p><code>killall fdfs_trackerd</code>    </p>
+<p><code>killall fdfs_storaged</code></p>
+</li>
+<li><p>查看启动进程</p>
+<p><code>ps aux|grep fdfs</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ ps aux | grep fdfs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">root             49030   0.0  0.4  4367104  66828   ??  S     9:48上午   0:01.25 &#x2F;usr&#x2F;local&#x2F;bin&#x2F;fdfs_storaged &#x2F;etc&#x2F;fdfs&#x2F;storage.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">root             48979   0.0  0.0  4306600    984   ??  S     9:47上午   0:01.14 &#x2F;usr&#x2F;local&#x2F;bin&#x2F;fdfs_trackerd &#x2F;etc&#x2F;fdfs&#x2F;tracker.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">macos            53684   0.0  0.0  4277516    716 s002  R+   11:32上午   0:00.00 grep --color&#x3D;auto --exclude-dir&#x3D;.bzr --exclude-dir&#x3D;CVS --exclude-dir&#x3D;.git --exclude-dir&#x3D;.hg --exclude-dir&#x3D;.svn --exclude-dir&#x3D;.idea --exclude-dir&#x3D;.tox fdfs</span></pre></td></tr></table></figure>
+
+<ul>
+<li>此时traker和storage已经都启动了，之后可以进行文件上传</li>
+</ul>
+<h1 id="10-配置client"><a href="#10-配置client" class="headerlink" title="10. 配置client"></a>10. 配置client</h1><ol>
+<li><p>拷贝配置文件<code>sudo cp /etc/fdfs/client.conf.sample /etc/fdfs/client.conf</code></p>
+</li>
+<li><p>使用<code>sudo vim /etc/fdfs/client.conf</code>修改配置文件内容如下</p>
+<p><code>tracker_server=自己机器的ip地址:22122</code></p>
+</li>
+</ol>
+<h1 id="11-上传文件"><a href="#11-上传文件" class="headerlink" title="11. 上传文件"></a>11. 上传文件</h1><ul>
+<li><p>执行<code>sudo fdfs_upload_file /etc/fdfs/client.conf ~/Desktop/WechatIMG31.jpeg</code>上传文件</p>
+</li>
+<li><p>上传成功之后可查看到文件的分组信息</p>
+<p><code>group1/M00/00/00/wKgBZV7J60aAJ6W1ABGt6XMn1E409.jpeg</code></p>
+</li>
+<li><p>之后完成nginx配置之后可通过nginx查看到上传到fastdfs的文件</p>
+</li>
+</ul>
+<h1 id="12-安装nginx及fastdfs-nginx-module"><a href="#12-安装nginx及fastdfs-nginx-module" class="headerlink" title="12. 安装nginx及fastdfs-nginx-module"></a>12. 安装nginx及fastdfs-nginx-module</h1><ul>
+<li><p>解压缩<code>fastdfs-nginx-module-1.22</code></p>
+</li>
+<li><p>解压缩<code>nginx-1.15.4.tar.gz</code> 并进入解压之后的目录</p>
+</li>
+<li><p>进行配置</p>
+<p><code>sudo ./configure --prefix=/usr/local/nginx/ --add-module=fastdfs-nginx-module-1.22</code>解压后的目录的绝对路径/src`</p>
+<p><code>sudo ./configure --prefix=/usr/local/nginx/ --add-module=/opt/fastdfs-nginx-module-master/src</code></p>
+</li>
+<li><p>进行编译</p>
+<p>Mac: <code>sudo make &amp;&amp; make install</code></p>
+<p>Linux: <code>sudo ./make.sh &amp;&amp; ./make.sh install</code></p>
+</li>
+<li><p>sudo cp 解压缩的fastdfs-master/conf目录中的http.conf  /etc/fdfs/http.conf</p>
+</li>
+<li><p>sudo cp 解压缩的fastdfs-master目录中的mime.types /etc/fdfs/mime.types</p>
+<p><code>sudo vim /etc/fdfs/mod_fastdfs.conf</code>修改内容如下</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">connect_timeout&#x3D;10</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">tracker_server&#x3D;自己机器的ip地址:22122</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">url_have_group_name&#x3D;true</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">store_path0&#x3D;&#x2F;Users&#x2F;macos&#x2F;workspace&#x2F;fastdfs&#x2F;storage</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">group_count &#x3D; 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">[group1]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">group_name&#x3D;group1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">storage_server_port&#x3D;23000</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">#store_path_count&#x3D;2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">store_path0&#x3D;&#x2F;Users&#x2F;macos&#x2F;workspace&#x2F;fastdfs&#x2F;storage</span></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>修改nginx配置文件<code>sudo vim /usr/local/nginx/conf/nginx.conf</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">server &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">            listen       8888;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">            server_name  localhost;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            location ~&#x2F;group[0-9]&#x2F; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">                ngx_fastdfs_module;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            error_page   500 502 503 504  &#x2F;50x.html;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            location &#x3D; &#x2F;50x.html &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            root   html;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>检查nginx配置文件是否正确</p>
+<p><code>sudo /usr/local/nginx/sbin/nginx -t</code></p>
+<ul>
+<li>启动nginx</li>
+</ul>
+<p><code>sudo /usr/local/nginx/sbin/nginx</code></p>
+</li>
+</ul>
+<p>  查看nginx进程<code>ps aux|grep nginx</code>,master 和worker process都已经启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">nobody           50495   0.0  0.0  4327020   2188   ??  S    10:16上午   0:00.01 nginx: worker process</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">root             34967   0.0  0.0  4326260   1780   ??  Ss   12:23下午   0:00.02 nginx: master process &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">macos            55519   0.0  0.0  4268192    572 s002  R+   12:17下午   0:00.00 grep --color&#x3D;auto --exclude-dir&#x3D;.bzr --exclude-dir&#x3D;CVS --exclude-dir&#x3D;.git --exclude-dir&#x3D;.hg --exclude-dir&#x3D;.svn --exclude-dir&#x3D;.idea --exclude-dir&#x3D;.tox nginx</span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>重新启动nginx</p>
+<p><code>sudo /usr/local/nginx/sbin/nginx -s reload</code></p>
+</li>
+<li><p>停止nginx</p>
+<p><code>sudo /usr/local/nginx/sbin/nginx -s stop</code></p>
+</li>
+<li><p>在进行上述编译过程可能遇到很多的问题,</p>
+<ul>
+<li>编译时头文件找不到，这里我使用了一个软连接<code>ln -s /usr/local/include/fast* /usr/include/</code>将/usr/local/include/fast指向了/usr/include/，同时升级到了fastdfns-nginx-module-1.22， nginx也从1.8升级到了1.15，如果之前在编译nginx 使用<code>--prefix</code>指定了编译之后的路径为<code>/usr/local/nginx</code>升级时直接删除<code>/usr/local/nginx</code> 文件夹就行了(<code>sudo -rf /usr/local/nginx</code>)</li>
+<li>修改fastdfns-nginx-module-1.22/src/config 文件</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">ngx_addon_name&#x3D;ngx_http_fastdfs_module</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">if test -n &quot;$&#123;ngx_module_link&#125;&quot;; then</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ngx_module_type&#x3D;HTTP</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    ngx_module_name&#x3D;$ngx_addon_name</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    ngx_module_incs&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;include&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    ngx_module_libs&#x3D;&quot;-lfastcommon -lfdfsclient&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    ngx_module_srcs&#x3D;&quot;$ngx_addon_dir&#x2F;ngx_http_fastdfs_module.c&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    ngx_module_deps&#x3D;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    CFLAGS&#x3D;&quot;$CFLAGS -D_FILE_OFFSET_BITS&#x3D;64 -DFDFS_OUTPUT_CHUNK_SIZE&#x3D;&#39;256*1024&#39; -DFDFS_MOD_CONF_FILENAME&#x3D;&#39;\&quot;&#x2F;etc&#x2F;fdfs&#x2F;mod_fastdfs.conf\&quot;&#39;&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    . auto&#x2F;module</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">else</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    HTTP_MODULES&#x3D;&quot;$HTTP_MODULES ngx_http_fastdfs_module&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    NGX_ADDON_SRCS&#x3D;&quot;$NGX_ADDON_SRCS $ngx_addon_dir&#x2F;ngx_http_fastdfs_module.c&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    CORE_INCS&#x3D;&quot;$CORE_INCS &#x2F;usr&#x2F;local&#x2F;include&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    CORE_LIBS&#x3D;&quot;$CORE_LIBS -lfastcommon -lfdfsclient&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    CFLAGS&#x3D;&quot;$CFLAGS -D_FILE_OFFSET_BITS&#x3D;64 -DFDFS_OUTPUT_CHUNK_SIZE&#x3D;&#39;256*1024&#39; -DFDFS_MOD_CONF_FILENAME&#x3D;&#39;\&quot;&#x2F;etc&#x2F;fdfs&#x2F;mod_fastdfs.conf\&quot;&#39;&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">fi</span></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Nginx启动之后没有worker进程</p>
+<ul>
+<li><p>议先查看<code>cat /usr/local/nginx/logs/error.log</code>错误日志信息，这里往往是问题的根本，之后再根据这个错误log 去Google一般能得到正确答案</p>
+</li>
+<li><p>大部分人遇到的第一个解法</p>
+<p><code>sudo cp 解压缩的fastdfs-master/conf目录中的http.conf  /etc/fdfs/http.conf</code></p>
+<p><code>sudo cp 解压缩的fastdfs-master目录中的mime.types /etc/fdfs/mime.types</code></p>
+</li>
+<li><p>我遇到的问题是<code>line: 474, host &quot;tracker&quot; is invalid, error info: Unknown host</code> tracker是一个无效的host地址</p>
+<ul>
+<li><p>这个是得修改<code>sudo vi /etc/fdfs/mod_fastdfs.conf</code>配置文件</p>
+<p><code>tracker_server=tracker:22122</code> 这行数据在文件的开头部分，我当时没有注意到这行直接在文件的末尾添加了<code>tracker_server=192.168.1.101:22122</code>，之后寻找了好长时间感觉自己配置的都是对的为什么worker process没起来呢。后来查看官方的wiki之后发现了问题，我在文件末尾添加了<code>tracker_server=192.168.1.101:22122</code>相当于同时存在了两个<code>tracker_server</code>即两个服务器。</p>
+</li>
+</ul>
+</li>
+<li><p>使用nginx访问fastfds上传的文件出现<code>400 Bad Request</code></p>
+<ul>
+<li><p>文件路径不对</p>
+</li>
+<li><p>修改<code>/etc/fdfs/mod_fastdfs.conf</code>中 <code>group_count = 1</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="13-通过Nginx访问fastdfs上传的文件"><a href="#13-通过Nginx访问fastdfs上传的文件" class="headerlink" title="13. 通过Nginx访问fastdfs上传的文件"></a>13. 通过Nginx访问fastdfs上传的文件</h1><p><img src="https://i.loli.net/2020/05/24/lawZncrsXguBpVY.png" alt="截屏2020-05-24 下午12.27.10.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/16/Dailyfresh05-%E7%99%BB%E9%99%86%E9%85%8D%E7%BD%AE/" rel="next" title="Dailyfresh05-登陆配置">
+                <i class="fa fa-chevron-left"></i> Dailyfresh05-登陆配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://cdn.jsdelivr.net/gh/Desperado1001/ImgHosting/paolo-PIC25812727.jpeg"
+                alt="Paolo" />
+            
+              <p class="site-author-name" itemprop="name">Paolo</p>
+              <p class="site-description motion-element" itemprop="description">又见暮雪亦白头</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本文介绍在Mac以及Linux下安装配置FastDFS-和Nginx-详细步骤以及一些坑"><span class="nav-number">1.</span> <span class="nav-text">本文介绍在Mac以及Linux下安装配置FastDFS 和Nginx 详细步骤以及一些坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-FastDFS特点"><span class="nav-number">2.</span> <span class="nav-text">1. FastDFS特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-FastDFS系统架构"><span class="nav-number">3.</span> <span class="nav-text">2. FastDFS系统架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-相关安装包（以上传百度网盘）"><span class="nav-number">4.</span> <span class="nav-text">3. 相关安装包（以上传百度网盘）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-mac系统准备工作，Linux可跳过"><span class="nav-number">5.</span> <span class="nav-text">4. mac系统准备工作，Linux可跳过</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-FastDFS-安装"><span class="nav-number">6.</span> <span class="nav-text">5. FastDFS 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-pcre-安装（PCRE-作用是让-Nginx-支持-Rewrite-功能）"><span class="nav-number">7.</span> <span class="nav-text">6. pcre 安装（PCRE 作用是让 Nginx 支持 Rewrite 功能）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-设置跟踪服务器tracker"><span class="nav-number">8.</span> <span class="nav-text">7. 设置跟踪服务器tracker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-设置存储服务器storage"><span class="nav-number">9.</span> <span class="nav-text">8. 设置存储服务器storage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-启动停止tracker和storage"><span class="nav-number">10.</span> <span class="nav-text">9. 启动停止tracker和storage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-配置client"><span class="nav-number">11.</span> <span class="nav-text">10. 配置client</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-上传文件"><span class="nav-number">12.</span> <span class="nav-text">11. 上传文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-安装nginx及fastdfs-nginx-module"><span class="nav-number">13.</span> <span class="nav-text">12. 安装nginx及fastdfs-nginx-module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-通过Nginx访问fastdfs上传的文件"><span class="nav-number">14.</span> <span class="nav-text">13. 通过Nginx访问fastdfs上传的文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Paolo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
